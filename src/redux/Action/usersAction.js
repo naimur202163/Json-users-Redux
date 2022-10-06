@@ -1,25 +1,19 @@
-import {
-  FETCH_DATA_ERROR,
-  FETCH_DATA_REQUEST,
-  FETCH_DATA_SUCCESS,
-} from "./../constants/actionType";
+import axios from "axios";
+import { ALL_USER_FAILD, ALL_USER_SUCCESS } from "../constants/actionType";
 
-export const fetchDataRequest = () => {
-  return {
-    type: FETCH_DATA_REQUEST,
-  };
-};
+const getUser = async (dispatch) => {
+  try {
+    dispatch({ type: "ALL_USER_REQUEST" });
+    const { data } = await axios.get(`https://jsonplaceholder.typicode.com/`);
 
-export const fetchDataSuccess = (item) => {
-  return {
-    type: FETCH_DATA_SUCCESS,
-    item,
-  };
-};
-
-export const fetchDataError = (error) => {
-  return {
-    type: FETCH_DATA_ERROR,
-    payload: { error },
-  };
+    dispatch({
+      type: ALL_USER_SUCCESS,
+      payload: data.users,
+    });
+  } catch (error) {
+    dispatch({
+      type: ALL_USER_FAILD,
+      payload: error.respone.data.message,
+    });
+  }
 };
