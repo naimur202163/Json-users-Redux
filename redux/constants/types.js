@@ -1,0 +1,5 @@
+export const ALL_USER_REQUESER = "ALL_USER_REQUESER";
+
+export const ALL_USER_SUCCESS = "ALL_USER_SUCCESS";
+
+export const ALL_USER_FAILS = "ALL_USER_FAILS";
